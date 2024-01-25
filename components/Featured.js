@@ -57,7 +57,7 @@ export default function Featured({product}) {
               >
                 Read more
               </ButtonLink>
-              <Button primary="true">
+              <Button primary="true" marginRight="5px">
                 <CartIcon />
                 Add to cart
               </Button>

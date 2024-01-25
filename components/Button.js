@@ -1,4 +1,5 @@
 import styled, {css} from "styled-components";
+import { primaryColor } from "@/utils/colors";
 
 export const ButtonStyle = css`
   background-color: #222;
@@ -12,8 +13,12 @@ export const ButtonStyle = css`
   text-decoration: none;
   svg {
     height: 1.2em;
-    margin-right: 5px;
   }
+  ${props => props.marginRight && css`
+    svg {
+      margin-right: ${props.marginRight};
+    }
+  `}
   ${props => props.black && css`
     background-color: #222;
   `}
@@ -23,8 +28,8 @@ export const ButtonStyle = css`
     color: #222;
   `}
   ${props => props.primary && css`
-    background-color: #5542F6;
-    border: 1px solid #5542F6;
+    background-color: ${primaryColor};
+    border: 1px solid ${primaryColor};
   `}
   ${props => props.size === "l" && css`
     font-size: 1.2rem;
