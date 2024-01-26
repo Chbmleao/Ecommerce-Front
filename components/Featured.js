@@ -3,6 +3,8 @@ import Center from "./Center";
 import Button from "./Button";
 import ButtonLink from "./ButtonLink";
 import CartIcon from "./icons/CartIcon";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const Bg = styled.div`
   background-color: #fff;
@@ -42,6 +44,12 @@ const Column = styled.div`
 `;
 
 export default function Featured({product}) {
+  const {addProductToCart} = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addProductToCart(product._id);
+  };
+
   return (
     <Bg>
       <Center>
@@ -57,7 +65,7 @@ export default function Featured({product}) {
               >
                 Read more
               </ButtonLink>
-              <Button primary="true" marginRight="5px">
+              <Button primary="true" marginRight="5px" onClick={handleAddToCart}>
                 <CartIcon />
                 Add to cart
               </Button>
@@ -65,7 +73,7 @@ export default function Featured({product}) {
           </div>
           </Column>
           <Column>
-            <img src="https://carlos-leao-next-ecommerce.s3.amazonaws.com/1706210756201.png"></img>
+            <img src="https://carlos-leao-next-ecommerce.s3.amazonaws.com/1706210756201.png" alt={product.title}></img>
           </Column>
         </ColumnsWrapper>
       </Center>

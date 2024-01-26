@@ -7,7 +7,7 @@ import NewProducts from "@/components/NewProducts";
 export default function HomePage({featuredProduct, newProducts}) {
   return (
     <div>
-      <Header />
+      <Header/>
       <Featured product={featuredProduct}/>
       <NewProducts products={newProducts}/>
     </div>
@@ -18,7 +18,6 @@ export async function getServerSideProps() {
   await mongooseConnect();
   const featuredProduct = await getFeaturedProduct();
   const newProducts = await getNewProducts();
-  console.log(newProducts);
   return {
     props: {
       featuredProduct: featuredProduct,
