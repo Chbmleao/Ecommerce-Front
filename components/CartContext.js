@@ -28,7 +28,11 @@ export function CartContextProvider({children}) {
   const memoizedGetCartLength = useMemo(() => getCartLength, [cartProducts]);
 
   return (
-    <CartContext.Provider value={{addProductToCart, getCartLength: memoizedGetCartLength}}>
+    <CartContext.Provider value={{ 
+      cartProducts, 
+      addProductToCart, 
+      getCartLength: memoizedGetCartLength
+    }}>
       {children}
     </CartContext.Provider>
   );
