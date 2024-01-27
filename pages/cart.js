@@ -64,36 +64,17 @@ export default function CartPage() {
 }
 
 async function getCartProducts(cartProductsIds) {
-  const cartProducts = [];
-  const productsIds = [];
-
-  for (const productId of cartProductsIds) {
-    const existingItem = cartProducts.find((item) => item._id === productId);
-
-    if (existingItem) {
-      existingItem.quantity++;
-    } else {
-      const item = {
-        _id: productId,
-        quantity: 1,
-      };
-      cartProducts.push(item);
-      productsIds.push(productId);
-    }
-  }
-
-  if (productsIds.length === 0) {
-    return Promise.resolve([]);
-  }
-
-  return axios.post("/api/cart", {ids: productsIds})
+  return axios.post("/api/cart", {ids: cartProductsIds})
     .then((res) => {
       const products = res.data;
       for (const product of products) {
-        const item = cartProducts.find((item) => item._id === product._id);
-        product.quantity = item.quantity;
+        product.quantity = 0;
+        for (const productId of cartProductsIds) {
+          if (product._id === productId) {
+            product.quantity++;
+          }
+        }
       }
-
       return products;
     }
   );
