@@ -1,9 +1,10 @@
-import Center from "@/components/Center";
-import Header from "@/components/Header";
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
+import Center from "@/components/Center";
+import Header from "@/components/Header";
+import CartTable from "@/components/CartTable";
 import { CartContext } from "@/components/CartContext";
-import axios from "axios";
 
 const ColumnsWrapper = styled.div`
   margin: 40px 0;
@@ -20,7 +21,7 @@ const Box = styled.div`
 `;
 
 export default function CartPage() {
-  const { cartProducts: cartProductsIds} = useContext(CartContext);
+  const { cartProducts: cartProductsIds } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   
   useEffect(() => {
@@ -42,20 +43,11 @@ export default function CartPage() {
       <Center>
         <ColumnsWrapper>
           <Box>
-            <h1>Cart</h1>
-            <div>
-              {products?.map((product) => {
-                return (
-                  <div key={product._id}>
-                    <div>{product.title}</div>
-                    <div>{product.quantity}</div>
-                  </div>
-                );
-              })}
-            </div>
+            <h2>Cart</h2>
+            <CartTable products={products}/>
           </Box>
           <Box>
-            <h1>Cart</h1>
+            <h2>Order information</h2>
           </Box>
         </ColumnsWrapper>
       </Center>

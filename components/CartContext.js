@@ -21,6 +21,14 @@ export function CartContextProvider({children}) {
     setCartProducts(prev => [...prev, productId]);
   }
 
+  function removeProductFromCart(productId) {
+    setCartProducts(prev => {
+      const indexToRemove = prev.indexOf(productId);
+      if (indexToRemove === -1) return prev;
+      return [...prev.slice(0, indexToRemove), ...prev.slice(indexToRemove + 1)];
+    });
+  }
+
   function getCartLength() {
     return cartProducts.length;
   }
@@ -31,6 +39,7 @@ export function CartContextProvider({children}) {
     <CartContext.Provider value={{ 
       cartProducts, 
       addProductToCart, 
+      removeProductFromCart,
       getCartLength: memoizedGetCartLength
     }}>
       {children}
