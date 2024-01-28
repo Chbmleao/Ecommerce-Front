@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useContext } from "react";
+import Link from "next/link";
 import { CartContext } from "@/components/CartContext";
 
 const Table = styled.table`
@@ -17,6 +18,21 @@ const Table = styled.table`
     font-size: 1rem;
     font-weight: bold;
   }
+`;
+
+const StyledLinkImage = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledLinkTitle = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const QuantityItem = styled.div`
@@ -75,9 +91,13 @@ export default function CartTable ({products}) {
             <tr key={product._id}>
               <td>
                 <ImageBox>
-                  <img src={product.images[0]} alt={product.title}/>
+                  <StyledLinkImage href={"/product/" + product._id}>
+                    <img src={product.images[0]} alt={product.title}/>
+                  </StyledLinkImage>
                 </ImageBox>
-                {product.title}
+                <StyledLinkTitle href={"/product/" + product._id}>
+                  {product.title}
+                </StyledLinkTitle>
               </td>
               <td>
                 <QuantityItem>
@@ -97,11 +117,9 @@ export default function CartTable ({products}) {
               Total
             </td>
             <td>
-              
-                ${products.reduce((acc, product) => {
-                  return acc + product.price * product.quantity;
-                }, 0)}
-              
+              ${products.reduce((acc, product) => {
+                return acc + product.price * product.quantity;
+              }, 0)}
             </td>
           </tr>
         </tbody>

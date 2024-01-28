@@ -9,7 +9,7 @@ import { CartContext } from "@/components/CartContext";
 const ColumnsWrapper = styled.div`
   margin: 40px 0;
   display: grid;
-  grid-template-columns: 1.3fr .7fr;
+  grid-template-columns: 1.2fr .8fr;
   gap: 40px;
 `;
 
