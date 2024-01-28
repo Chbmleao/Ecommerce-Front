@@ -7,7 +7,7 @@ const Table = styled.table`
   width: 100%;
   text-align: left;
   th {
-    padding: 10px;
+    padding: 0 10px;
     color: #C5C5C5;
     font-size: 12px;
     text-transform: uppercase;
@@ -20,19 +20,17 @@ const Table = styled.table`
   }
 `;
 
-const StyledLinkImage = styled(Link)`
+const StyledLinkTitle = styled(Link)`
   text-decoration: none;
   color: inherit;
+`;
+
+const StyledLinkImage = styled(StyledLinkTitle)`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledLinkTitle = styled(Link)`
-  text-decoration: none;
-  color: inherit;
 `;
 
 const QuantityItem = styled.div`
