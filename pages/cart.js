@@ -32,7 +32,7 @@ const Box = styled.div`
 `;
 
 const ScrollableBox = styled(Box)`
-  height: 75vh;
+  max-height: 75vh;
   overflow: auto;
 `;
 
@@ -61,6 +61,13 @@ export default function CartPage() {
   const { cartProducts: cartProductsIds } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userCity, setUserCity] = useState("");
+  const [userPostalCode, setUserPostalCode] = useState("");
+  const [userStreetAddress, setUserStreetAddress] = useState("");
+  const [userCountry, setUserCountry] = useState("");
+
   useEffect(() => {
     const fetchCartProducts = async () => {
       try {
@@ -81,23 +88,63 @@ export default function CartPage() {
         <ColumnsWrapper>
           <ScrollableBox>
             <h2>Cart</h2>
-            <CartTable products={products}/>
+            {
+              products.length === 0
+                ? <p>Your cart is empty</p>
+                : <CartTable products={products}/>
+            }
           </ScrollableBox>
           <Box>
             <h2>Order information</h2>
-            <div>
-              <Input placeholder="Name"/>
-              <Input placeholder="Email"/>
+            <form method="post" action="/api/checkout">
+              <Input 
+                type="text"
+                placeholder="Name"
+                value={userName}
+                name="userName" 
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <Input 
+                type="text"
+                placeholder="Email"
+                value={userEmail}
+                name="userEmail"
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
               <AddressInput>
-                <Input placeholder="City"/>
-                <Input placeholder="Postal Code"/>
+                <Input 
+                  type="text"
+                  placeholder="City" 
+                  value={userCity}
+                  name="userCity"
+                  onChange={(e) => setUserCity(e.target.value)}
+                />
+                <Input 
+                  type="text"
+                  placeholder="Postal Code" 
+                  value={userPostalCode}
+                  name="userPostalCode"
+                  onChange={(e) => setUserPostalCode(e.target.value)}
+                />
               </AddressInput>
-              <Input placeholder="Street address"/>
-              <Input placeholder="Country"/>
+              <Input 
+                type="text"
+                placeholder="Street address" 
+                value={userStreetAddress}
+                name="userStreetAddress"
+                onChange={(e) => setUserStreetAddress(e.target.value)}
+              />
+              <Input 
+                type="text"
+                placeholder="Country" 
+                value={userCountry}
+                name="userCountry"
+                onChange={(e) => setUserCountry(e.target.value)}
+              />
               <ButtonWrapper>
-                <ButtonLink href="/checkout">Continue to payment</ButtonLink>
+                <Button type="submit">Continue to payment</Button>
               </ButtonWrapper>
-            </div>
+            </form>
           </Box>
         </ColumnsWrapper>
       </Center>
