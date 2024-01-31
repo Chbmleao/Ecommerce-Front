@@ -5,7 +5,7 @@ import Center from "@/components/Center";
 import Header from "@/components/Header";
 import CartTable from "@/components/CartTable";
 import { CartContext } from "@/components/CartContext";
-import ButtonLink from "@/components/ButtonLink";
+import Button from "@/components/Button";
 
 const CartPageWrapper = styled.div`
   height: 100vh;
@@ -141,6 +141,7 @@ export default function CartPage() {
                 name="userCountry"
                 onChange={(e) => setUserCountry(e.target.value)}
               />
+              <input type="hidden" name="products" value={JSON.stringify(cartProductsIds)} />
               <ButtonWrapper>
                 <Button type="submit">Continue to payment</Button>
               </ButtonWrapper>

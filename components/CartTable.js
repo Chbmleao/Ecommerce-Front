@@ -105,7 +105,7 @@ export default function CartTable ({products}) {
                 </QuantityItem>
               </td>
               <td>
-                ${product.price}
+                ${product.price * product.quantity} 
               </td>
             </tr>
           ))}
