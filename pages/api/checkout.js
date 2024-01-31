@@ -1,6 +1,7 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Order } from "@/models/Order";
 import {Product} from "@/models/Product";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,10 +17,9 @@ export default async function handler(req, res) {
     userPostalCode, 
     userStreetAddress, 
     userCountry,
-    products,
+    productsIds,
   } = req.body;
 
-  const productsIds = JSON.parse(products);
   const uniqueIds = [...new Set(productsIds)];
   const productsInfos = await Product.find({ _id: uniqueIds });
 
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
         product_data: {
           name: productInfo.title,
         },
-        unit_amount: productInfo.price * quantity,
+        unit_amount: productInfo.price * 100,
       },
       quantity,
     });
@@ -53,5 +53,18 @@ export default async function handler(req, res) {
     line_items,
   });
 
-  res.json({line_items});
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: "payment",
+    customer_email: userEmail,
+    success_url: `${process.env.PUBLIC_URL}/cart?success=1`,
+    cancel_url: `${process.env.PUBLIC_URL}/cart?canceled=1`,
+    metadata: {
+      orderId: orderDoc._id.toString(),
+    },
+  });
+
+  res.json({
+    url: session.url,
+  });
 }

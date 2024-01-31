@@ -1,5 +1,6 @@
 import axios from "axios";
 import styled from "styled-components";
+import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from "react";
 import Center from "@/components/Center";
 import Header from "@/components/Header";
@@ -58,6 +59,8 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function CartPage() {
+  const router = useRouter();
+
   const { cartProducts: cartProductsIds } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   
@@ -67,6 +70,24 @@ export default function CartPage() {
   const [userPostalCode, setUserPostalCode] = useState("");
   const [userStreetAddress, setUserStreetAddress] = useState("");
   const [userCountry, setUserCountry] = useState("");
+
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  async function goToPayment() {
+    const response = await axios.post("/api/checkout", {
+      name: userName,
+      email: userEmail,
+      city: userCity,
+      postalCode: userPostalCode,
+      streetAddress: userStreetAddress,
+      country: userCountry,
+      productsIds: cartProductsIds,
+    });
+
+    if (response.data.url) {
+      window.location = response.data.url;
+    }
+  }
 
   useEffect(() => {
     const fetchCartProducts = async () => {
@@ -80,6 +101,28 @@ export default function CartPage() {
 
     fetchCartProducts();
   }, [cartProductsIds]);
+
+  useEffect(() => {
+    if (router.asPath.includes('success')) {
+      setIsSuccess(true);
+    }
+  }, [router.asPath]);
+
+  if (isSuccess) {
+    return (
+      <div>
+        <Header />
+        <Center>
+          <ColumnsWrapper>
+            <Box>
+              <h1>Thank you for your order!</h1>
+              <p>We will send you an email with your order details.</p>
+            </Box>
+          </ColumnsWrapper>
+        </Center>
+      </div>
+    )
+  }
 
   return (
     <CartPageWrapper>
@@ -96,56 +139,55 @@ export default function CartPage() {
           </ScrollableBox>
           <Box>
             <h2>Order information</h2>
-            <form method="post" action="/api/checkout">
+            <Input 
+              type="text"
+              placeholder="Name"
+              value={userName}
+              name="userName" 
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <Input 
+              type="text"
+              placeholder="Email"
+              value={userEmail}
+              name="userEmail"
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <AddressInput>
               <Input 
                 type="text"
-                placeholder="Name"
-                value={userName}
-                name="userName" 
-                onChange={(e) => setUserName(e.target.value)}
+                placeholder="City" 
+                value={userCity}
+                name="userCity"
+                onChange={(e) => setUserCity(e.target.value)}
               />
               <Input 
                 type="text"
-                placeholder="Email"
-                value={userEmail}
-                name="userEmail"
-                onChange={(e) => setUserEmail(e.target.value)}
+                placeholder="Postal Code" 
+                value={userPostalCode}
+                name="userPostalCode"
+                onChange={(e) => setUserPostalCode(e.target.value)}
               />
-              <AddressInput>
-                <Input 
-                  type="text"
-                  placeholder="City" 
-                  value={userCity}
-                  name="userCity"
-                  onChange={(e) => setUserCity(e.target.value)}
-                />
-                <Input 
-                  type="text"
-                  placeholder="Postal Code" 
-                  value={userPostalCode}
-                  name="userPostalCode"
-                  onChange={(e) => setUserPostalCode(e.target.value)}
-                />
-              </AddressInput>
-              <Input 
-                type="text"
-                placeholder="Street address" 
-                value={userStreetAddress}
-                name="userStreetAddress"
-                onChange={(e) => setUserStreetAddress(e.target.value)}
-              />
-              <Input 
-                type="text"
-                placeholder="Country" 
-                value={userCountry}
-                name="userCountry"
-                onChange={(e) => setUserCountry(e.target.value)}
-              />
-              <input type="hidden" name="products" value={JSON.stringify(cartProductsIds)} />
-              <ButtonWrapper>
-                <Button type="submit">Continue to payment</Button>
-              </ButtonWrapper>
-            </form>
+            </AddressInput>
+            <Input 
+              type="text"
+              placeholder="Street address" 
+              value={userStreetAddress}
+              name="userStreetAddress"
+              onChange={(e) => setUserStreetAddress(e.target.value)}
+            />
+            <Input 
+              type="text"
+              placeholder="Country" 
+              value={userCountry}
+              name="userCountry"
+              onChange={(e) => setUserCountry(e.target.value)}
+            />
+            <ButtonWrapper>
+              <Button onClick={goToPayment}>
+                Continue to payment
+              </Button>
+            </ButtonWrapper>
           </Box>
         </ColumnsWrapper>
       </Center>
