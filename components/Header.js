@@ -1,7 +1,8 @@
+import { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import Center from "@/components/Center";
-import { useContext } from "react";
 import { CartContext } from "@/components/CartContext";
 
 const StyledHeader = styled.header`
@@ -25,12 +26,13 @@ const StyledNav = styled.nav`
 `;
 
 const NavLink = styled(Link)`
-  color: #aaa;
+  color: ${(props) => (props.isCurrentPage ? "white" : "#aaa")};
   text-decoration: none;
 `;
 
 export default function Header() {
   const {getCartLength} = useContext(CartContext);
+  const router = useRouter();
 
   return (
     <StyledHeader>
@@ -38,11 +40,36 @@ export default function Header() {
         <Wrapper>
           <Logo href={"/"}>Ecommerce</Logo>
           <StyledNav>
-            <NavLink href={"/"}>Home</NavLink>
-            <NavLink href={"/products"}>All products</NavLink>
-            <NavLink href={"/categories"}>Categories</NavLink>
-            <NavLink href={"/account"}>Account</NavLink>
-            <NavLink href={"/cart"}>Cart ({getCartLength()})</NavLink>
+            <NavLink 
+              href={"/"} 
+              isCurrentPage={router.pathname === "/"}
+            >
+              Home
+            </NavLink>
+            <NavLink 
+              href={"/products"} 
+              isCurrentPage={router.pathname === "/products"}
+            >
+              All products
+            </NavLink>
+            <NavLink 
+              href={"/categories"} 
+              isCurrentPage={router.pathname === "/categories"}
+            >
+              Categories
+            </NavLink>
+            <NavLink 
+              href={"/account"} 
+              isCurrentPage={router.pathname === "/account"}
+            >
+              Account
+            </NavLink>
+            <NavLink 
+              href={"/cart"} 
+              isCurrentPage={router.pathname === "/cart"}
+            >
+              Cart ({getCartLength()})
+            </NavLink>
           </StyledNav>
         </Wrapper>
       </Center>
