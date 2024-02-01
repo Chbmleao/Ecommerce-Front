@@ -31,6 +31,7 @@ export function CartContextProvider({children}) {
 
   function cleanCart() {
     setCartProducts([]);
+    ls?.setItem("cartProducts", JSON.stringify([]));
   }
 
   function getCartLength() {
