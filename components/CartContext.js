@@ -29,6 +29,10 @@ export function CartContextProvider({children}) {
     });
   }
 
+  function cleanCart() {
+    setCartProducts([]);
+  }
+
   function getCartLength() {
     return cartProducts.length;
   }
@@ -40,6 +44,7 @@ export function CartContextProvider({children}) {
       cartProducts, 
       addProductToCart, 
       removeProductFromCart,
+      cleanCart,
       getCartLength: memoizedGetCartLength
     }}>
       {children}

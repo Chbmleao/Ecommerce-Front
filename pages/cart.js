@@ -61,7 +61,7 @@ const ButtonWrapper = styled.div`
 export default function CartPage() {
   const router = useRouter();
 
-  const { cartProducts: cartProductsIds } = useContext(CartContext);
+  const { cartProducts: cartProductsIds, cleanCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   
   const [userName, setUserName] = useState("");
@@ -75,12 +75,12 @@ export default function CartPage() {
 
   async function goToPayment() {
     const response = await axios.post("/api/checkout", {
-      name: userName,
-      email: userEmail,
-      city: userCity,
-      postalCode: userPostalCode,
-      streetAddress: userStreetAddress,
-      country: userCountry,
+      userName, 
+      userEmail, 
+      userCity, 
+      userPostalCode, 
+      userStreetAddress, 
+      userCountry,
       productsIds: cartProductsIds,
     });
 
@@ -105,6 +105,7 @@ export default function CartPage() {
   useEffect(() => {
     if (router.asPath.includes('success')) {
       setIsSuccess(true);
+      cleanCart();
     }
   }, [router.asPath]);
 

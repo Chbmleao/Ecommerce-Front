@@ -44,13 +44,13 @@ export default async function handler(req, res) {
   }
 
   const orderDoc = await Order.create({
-    name: userName,
-    email: userEmail,
-    city: userCity,
-    postalCode: userPostalCode,
-    streetAddress: userStreetAddress,
-    country: userCountry,
     line_items,
+    userName,
+    userEmail,
+    userCity,
+    userPostalCode,
+    userStreetAddress,
+    userCountry,
   });
 
   const session = await stripe.checkout.sessions.create({
