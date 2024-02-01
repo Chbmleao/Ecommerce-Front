@@ -60,7 +60,7 @@ export default function Featured({product}) {
             <Description>{product.description}</Description>
             <ButtonsWrapper>
               <ButtonLink 
-                href={"/products/" + product._id} 
+                href={"/product/" + product._id} 
                 outline="true"
               >
                 Read more
