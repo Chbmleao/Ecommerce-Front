@@ -16,10 +16,10 @@ const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-export default function NewProducts({products}) {
+export default function ProductsList({title, products}) {
   return (
     <Center>
-      <Title>New Arrivals</Title>
+      <Title>{title}</Title>
       <ProductsGrid>
         {products?.length > 0 && products.map((product) => (
           <ProductBox {...product}/>

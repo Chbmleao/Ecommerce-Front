@@ -2,14 +2,14 @@ import Header from "@/components/Header";
 import Featured from "@/components/Featured";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
-import NewProducts from "@/components/NewProducts";
+import ProductsList from "@/components/ProductsList";
 
 export default function HomePage({featuredProduct, newProducts}) {
   return (
     <div>
       <Header/>
       <Featured product={featuredProduct}/>
-      <NewProducts products={newProducts}/>
+      <ProductsList title="New Arrivals" products={newProducts}/>
     </div>
   );
 }
