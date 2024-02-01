@@ -1,14 +1,14 @@
-import { model, models, Schema } from 'mongoose';
+import { model, Schema, models } from "mongoose";
 
 const OrderSchema = new Schema({
   line_items: Object,
-  name:String,
-  email:String,
-  city:String,
-  postalCode:String,
-  streetAddress:String,
-  country:String,
+  userName:String,
+  userEmail:String,
+  userCity:String,
+  userPostalCode:String,
+  userStreetAddress:String,
+  userCountry:String,
   paid:{type:Boolean, default:false},
-});
+}, { timestamps: true });
 
 export const Order = models.Order || model("Order", OrderSchema);
