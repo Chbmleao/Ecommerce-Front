@@ -36,7 +36,7 @@ export const ButtonStyle = css`
     padding: 10px 20px;
     svg {
       height: 1.1em;
-      margin-right: 5px;
+      margin-right: 10px;
     }
   `}
 `;
