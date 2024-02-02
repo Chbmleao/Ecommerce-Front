@@ -26,7 +26,7 @@ const StyledNav = styled.nav`
 `;
 
 const NavLink = styled(Link)`
-  color: ${(props) => (props.isCurrentPage ? "white" : "#aaa")};
+  color: ${(props) => (props.is_current_page ? "white" : "#aaa")};
   text-decoration: none;
 `;
 
@@ -42,31 +42,31 @@ export default function Header() {
           <StyledNav>
             <NavLink 
               href={"/"} 
-              isCurrentPage={router.pathname === "/"}
+              is_current_page={(router.pathname === "/").toString()}
             >
               Home
             </NavLink>
             <NavLink 
               href={"/products"} 
-              isCurrentPage={router.pathname.includes("/products")}
+              is_current_page={(router.pathname.includes("/products")).toString()}
             >
               All products
             </NavLink>
             <NavLink 
               href={"/categories"} 
-              isCurrentPage={router.pathname.includes("/categories")}
+              is_current_page={(router.pathname.includes("/categories")).toString()}
             >
               Categories
             </NavLink>
             <NavLink 
               href={"/account"} 
-              isCurrentPage={router.pathname.includes("/account")}
+              is_current_page={(router.pathname.includes("/account")).toString()}
             >
               Account
             </NavLink>
             <NavLink 
               href={"/cart"} 
-              isCurrentPage={router.pathname.includes("/cart")}
+              is_current_page={(router.pathname.includes("/cart")).toString()}
             >
               Cart ({getCartLength()})
             </NavLink>

@@ -21,7 +21,7 @@ export default function ProductsList({title, products}) {
       <Title>{title}</Title>
       <ProductsGrid>
         {products?.length > 0 && products.map((product) => (
-          <ProductBox {...product}/>
+          <ProductBox key={product._id} {...product}/>
         ))}
       </ProductsGrid>
     </div>
