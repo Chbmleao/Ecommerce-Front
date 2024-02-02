@@ -22,6 +22,11 @@ const ColumnsWrapper = styled.div`
   h2 {
     margin-top: 0;
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Box = styled.div`
@@ -30,11 +35,21 @@ const Box = styled.div`
   padding: 2vh;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+  @media (max-width: 768px) {
+    padding: 1rem;
+    
+  }
 `;
 
 const ScrollableBox = styled(Box)`
   max-height: 75vh;
   overflow: auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    height: fit-content;
+  }
 `;
 
 const Input = styled.input`
