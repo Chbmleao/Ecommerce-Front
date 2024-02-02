@@ -13,6 +13,9 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    max-width: 90vw;
+  }
 `;
 
 const BoxImage = styled.img`
@@ -21,6 +24,11 @@ const BoxImage = styled.img`
   object-fit: contain;
   display: block;
   margin: 10px 0 20px;
+  @media (max-width: 768px) {
+    height: 25vh;
+    width: 100%;
+    margin: 5px 0 5px;
+  }
 `;
 
 const ImageButtons = styled.div`

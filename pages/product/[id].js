@@ -18,6 +18,14 @@ const ColumnsWrapper = styled.div`
   h2 {
     margin-top: 0;
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      max-width: 80%;
+    }
+  }
 `;
 
 const PriceDiv = styled.div`
@@ -28,6 +36,10 @@ const PriceDiv = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+const InfoBox = styled.div`
+  width: 100%;
+`; 
 
 export default function ProductPage({product}) {
   const {addProductToCart} = useContext(CartContext);
@@ -42,7 +54,7 @@ export default function ProductPage({product}) {
       <Center>
         <ColumnsWrapper>
           <ImageBox {...product}/>
-          <div>
+          <InfoBox>
             <h2>{product.title}</h2>
             <p>{product.description}</p>
             <PriceDiv>
@@ -52,7 +64,7 @@ export default function ProductPage({product}) {
                 Add to Cart
               </Button>
             </PriceDiv>
-          </div>
+          </InfoBox>
         </ColumnsWrapper>
       </Center>
     </div>
