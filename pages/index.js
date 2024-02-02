@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Featured from "@/components/Featured";
+import Center from "@/components/Center";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 import ProductsList from "@/components/ProductsList";
@@ -9,7 +10,9 @@ export default function HomePage({featuredProduct, newProducts}) {
     <div>
       <Header/>
       <Featured product={featuredProduct}/>
-      <ProductsList title="New Arrivals" products={newProducts}/>
+      <Center>
+        <ProductsList title="New Arrivals" products={newProducts}/>
+      </Center>
     </div>
   );
 }

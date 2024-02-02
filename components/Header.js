@@ -48,25 +48,25 @@ export default function Header() {
             </NavLink>
             <NavLink 
               href={"/products"} 
-              isCurrentPage={router.pathname === "/products"}
+              isCurrentPage={router.pathname.includes("/products")}
             >
               All products
             </NavLink>
             <NavLink 
               href={"/categories"} 
-              isCurrentPage={router.pathname === "/categories"}
+              isCurrentPage={router.pathname.includes("/categories")}
             >
               Categories
             </NavLink>
             <NavLink 
               href={"/account"} 
-              isCurrentPage={router.pathname === "/account"}
+              isCurrentPage={router.pathname.includes("/account")}
             >
               Account
             </NavLink>
             <NavLink 
               href={"/cart"} 
-              isCurrentPage={router.pathname === "/cart"}
+              isCurrentPage={router.pathname.includes("/cart")}
             >
               Cart ({getCartLength()})
             </NavLink>

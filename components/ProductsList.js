@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Center from "./Center";
 import ProductBox from "./ProductBox";
 
 const ProductsGrid = styled.div`
@@ -18,13 +17,13 @@ const Title = styled.h2`
 
 export default function ProductsList({title, products}) {
   return (
-    <Center>
+    <div>
       <Title>{title}</Title>
       <ProductsGrid>
         {products?.length > 0 && products.map((product) => (
           <ProductBox {...product}/>
         ))}
       </ProductsGrid>
-    </Center>
+    </div>
   );
 }
