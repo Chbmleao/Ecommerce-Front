@@ -6,6 +6,9 @@ const ProductsGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
   padding: 1rem 0;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Title = styled.h2`

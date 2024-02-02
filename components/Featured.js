@@ -15,6 +15,9 @@ const Title = styled.h1`
   margin: 0;
   font-weight: normal;
   font-size: 3rem;
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const Description = styled.p`
@@ -29,6 +32,18 @@ const ColumnsWrapper = styled.div`
   img {
     max-width: 100%;
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      max-width: 80%;
+    }
+    div:first-child {
+      order:2;
+    }
+    font-size: .8em;
+  }
 `;
 
 const ButtonsWrapper = styled.div`
@@ -41,6 +56,7 @@ const ButtonsWrapper = styled.div`
 const Column = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export default function Featured({product}) {

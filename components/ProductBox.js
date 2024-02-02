@@ -43,6 +43,9 @@ const PriceRow = styled.div`
 const Price = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
 export default function ProductBox({_id, title, price, images}) {
